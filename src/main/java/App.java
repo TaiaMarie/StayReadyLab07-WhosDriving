@@ -1,4 +1,8 @@
 import Driving.Drivable;
+import Vehicles.HondaCivic;
+import Vehicles.JeepWrangler;
+import Vehicles.MountainBike;
+import Vehicles.RacingBicycle;
 
 import java.util.Scanner;
 
@@ -17,8 +21,8 @@ public class App {
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        if (args[0].equals("test"))
-            in = new Scanner(args[1]);
+        //if (args[0].equals("test"))
+        //    in = new Scanner(args[1]);
         Console c = new Console(in);
 
         System.out.println("What kinda of vehicle do you want to drive");
@@ -42,9 +46,31 @@ public class App {
      * @param c
      * @return input from Console c as Drivable
      */
-    public static Drivable getVehicle(Console c) {
+    public static Drivable getVehicle(Console c)
+    {   
         String input = c.getInput();
+        if(input.equals("honda civic"))
+        {
+            HondaCivic honda = new HondaCivic();
+        return honda;
+        }
+        else if(input.equals("jeep wrangler"))
+        {
+            JeepWrangler jeep = new JeepWrangler();
+        return jeep;
+        }
+        if(input.equals("mountain bike"))
+        {
+            MountainBike mount = new MountainBike();
+        return mount;
+        }
+        if(input.equals("racing bike"))
+        {
+            RacingBicycle race = new RacingBicycle();
+        return race;
+        }
         return null;
+        
     }
 
     /**
@@ -54,8 +80,10 @@ public class App {
      * @param c
      * @return Input from Console c as Double
      */
-    public static Double getDistance(Console c) {
+    public static Double getDistance(Console c) 
+    {
         String input = c.getInput();
-        return null;
+        Double dist = Double.parseDouble(input);
+        return dist;
     }
 }

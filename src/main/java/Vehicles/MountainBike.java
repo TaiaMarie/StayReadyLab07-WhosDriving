@@ -3,6 +3,10 @@ package Vehicles;
 import Driving.Bike;
 
 public class MountainBike extends Bike {
+
+    private Integer tirePressure = 30;
+    private double topSpeed = 28.5;
+    
     /**
      * The top speed of a mountain bike should be 28.5
      * but for every 1 PSI under the recommended tire
@@ -11,9 +15,9 @@ public class MountainBike extends Bike {
      *
      * @return 28.5 minus any reduction to top speed
      */
-    @Override
+    //@Override
     public Double getTopSpeed() {
-        return null;
+        return topSpeed;
     }
 
 
@@ -30,9 +34,35 @@ public class MountainBike extends Bike {
      * @param distance - length of travel in miles
      * @return time in seconds to travel distance
      */
-    @Override
-    public Integer transport(Double distance) {
-        return null;
+    //@Override
+    public Integer transport(Double distance)
+    {
+        Integer time = 0;
+        Integer limit = 20;
+
+        if(distance < 30)
+        {   
+            time = 3600;
+            time = time.intValue();
+            return time;
+        }
+        else
+        {
+            while(distance - 30 >= 0)
+            {
+                if(tirePressure > 20)
+                {
+                    tirePressure = tirePressure - 1;
+                }
+                topSpeed = topSpeed - 1;
+                distance = distance - 30;
+                
+                time = (int) (time + distance / topSpeed);
+                 time  = (int) (distance / getTopSpeed() * (60 * 60) + time);
+            }
+        }
+    
+        return time;
     }
 
     /**
@@ -43,15 +73,17 @@ public class MountainBike extends Bike {
      */
     @Override
     public Integer getTirePressure() {
-        return null;
+         return tirePressure;
     }
 
     /**
      * Returns the tires to the recommended PSI
      */
     @Override
-    public void inflateTires() {
-
+    public void inflateTires() 
+    {
+        recommendedTirePressure();
+        topSpeed = 28.5;
     }
 
     /**
@@ -60,6 +92,6 @@ public class MountainBike extends Bike {
      */
     @Override
     public Integer recommendedTirePressure() {
-        return null;
+        return tirePressure;
     }
 }

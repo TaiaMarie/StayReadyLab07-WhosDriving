@@ -2,7 +2,18 @@ package Vehicles;
 
 import Driving.Car;
 
-public class HondaCivic extends Car {
+public class HondaCivic extends Car 
+{
+    private double milesTraveled;
+
+    public void milesTraveled(double milesTraveled)
+    {
+        this.milesTraveled = milesTraveled;
+    }
+    public double getMilesTraveled() 
+    {
+        return milesTraveled;
+    }
     /**
      * A civic should need an oil change every
      * 50,000 miles traveled. Once the oil is
@@ -12,20 +23,25 @@ public class HondaCivic extends Car {
      * @return true if an oil change is needed
      */
     @Override
-    public Boolean needsOilChange() {
-        return null;
+    public Boolean needsOilChange()
+    {   if(getMilesTraveled() == 50000)
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
      * This method should reset any flags set
      * from when an oil change was needed. It
-     * should also indicate that another 50,000
+     * should also indicate that another 10,000
      * miles may be traveled before another oil
      * change is needed.
      */
     @Override
-    public void changeOil() {
-
+    public void changeOil()
+    {   //set miles back to 0
+        this.milesTraveled(0);
     }
 
     /**
@@ -36,8 +52,13 @@ public class HondaCivic extends Car {
      * @return true if anything is wrong with the car
      */
     @Override
-    public Boolean checkEngineLight() {
-        return null;
+    public Boolean checkEngineLight()
+    {   
+        if(needsOilChange())
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -48,18 +69,22 @@ public class HondaCivic extends Car {
      * than all previous values.
      * @return total distance as a Double
      */
+
+
     @Override
-    public Double getDistanceTraveled() {
-        return null;
+    public Double getDistanceTraveled()
+    {
+        return milesTraveled;
     }
 
     /**
      * Should return the top speed for a Civic (70 MPH)
      * @return 70.0
      */
-    @Override
-    public Double getTopSpeed() {
-        return null;
+    //@Override
+    public Double getTopSpeed()
+    {
+        return 70.0;
     }
 
     /**
@@ -70,8 +95,13 @@ public class HondaCivic extends Car {
      * @param distance - length of travel in miles
      * @return time in seconds to travel distance
      */
-    @Override
-    public Integer transport(Double distance) {
-        return null;
+    //@Override
+    public Integer transport(Double distance)
+    {   Integer time;
+
+        milesTraveled(getMilesTraveled() + distance);
+        double result  = distance / getTopSpeed() * (60 * 60);
+        time = (int) result;
+        return time;
     }
 }
